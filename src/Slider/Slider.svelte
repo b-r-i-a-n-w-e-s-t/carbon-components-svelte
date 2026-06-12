@@ -221,6 +221,7 @@
         aria-valuemax={max}
         aria-valuemin={min}
         aria-valuenow={value}
+        aria-readonly={readonly || undefined}
         aria-labelledby={labelId}
         aria-describedby={showInvalid
           ? errorId
@@ -274,6 +275,7 @@
         {value}
         aria-labelledby={$$props["aria-label"] ? undefined : labelId}
         aria-label={$$props["aria-label"] ?? "Slider number input"}
+        aria-readonly={readonly || undefined}
         {disabled}
         {readonly}
         {required}
