@@ -150,6 +150,37 @@ describe("Slider", () => {
     expect(slider).not.toHaveAttribute("tabindex");
   });
 
+  // In the read-only variant the thumb is hidden (zero-sized via CSS), so the
+  // number input is the slider's entire accessible surface — but NVDA
+  // announces spinbuttons with the native readonly attribute as "editable"
+  // (https://github.com/nvaccess/nvda/issues/13672). NVDA does report
+  // aria-readonly="true" on the spinbutton role, so the readonly state must
+  // be mirrored there. Reported in NVDA testing:
+  // https://github.com/txstate-etc/carbon-svelte/issues/221
+  it("should set aria-readonly on the input and thumb when readonly", () => {
+    render(Slider, {
+      props: { readonly: true },
+    });
+
+    expect(screen.getByRole("spinbutton")).toHaveAttribute(
+      "aria-readonly",
+      "true",
+    );
+    expect(screen.getByRole("slider")).toHaveAttribute(
+      "aria-readonly",
+      "true",
+    );
+  });
+
+  it("should not set aria-readonly when not readonly", () => {
+    render(Slider);
+
+    expect(screen.getByRole("spinbutton")).not.toHaveAttribute(
+      "aria-readonly",
+    );
+    expect(screen.getByRole("slider")).not.toHaveAttribute("aria-readonly");
+  });
+
   it("should not allow keyboard interaction when readonly", async () => {
     render(Slider, {
       props: { readonly: true, value: 50 },
