@@ -361,7 +361,7 @@ Disable specific items using the `disabled` property in the `items` prop. This e
 
 ## Read-only state
 
-Set `readonly` to `true` to display non-editable values. Selected items remain visible but cannot be cleared.
+Set `readonly` to `true` to display non-editable values. The menu can still be opened and navigated to review the selected values, but the selection cannot be changed or cleared.
 
 <MultiSelect
   readonly
